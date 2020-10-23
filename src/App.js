@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Game from "./components/game";
+import Header from "./components/header";
+import Instructions from "./components/instructions";
+import Scoreboard from "./components/scoreboard";
+import "./scss/app.scss";
+
+class App extends React.Component {
+    render() {
+        return (
+            <div className="app l-container-full-screen">
+                <Header title={"Memory Game"} />
+                <Instructions />
+                <div className="game-container">
+                    <Scoreboard />
+                    <Game />
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;

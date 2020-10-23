@@ -1,0 +1,64 @@
+@use 'variables';
+
+html {
+    font-size: 17px;
+}
+
+body {
+    font-family: $main-font;
+    color: $font-color-grey;
+    line-height: 2rem;
+    font-weight: 400;
+}
+
+.headline {
+    font-family: $secondary-font;
+    color: $font-color-dark;
+
+    &--large {
+        font-weight: 500;
+        font-size: 3rem;
+        padding: 40px 0;
+        line-height: 4rem;
+        text-align: center;
+        margin-top: 0;
+    }
+
+    &--medium {
+        font-weight: 300;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+}
+
+.instructions,
+.instructions-mobile {
+    color: $font-color-light-grey;
+}
+
+.contents__title {
+    font-size: 1.5rem;
+    color: $font-color-grey;
+    margin-bottom: 10px;
+    border-bottom: 2px solid $font-color-semi-light;
+    width: fit-content;
+}
+
+.lists-headline {
+    font-weight: 300;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 0;
+    text-align: left;
+    border-bottom: 2px solid #a0a0a0;
+    line-height: 2rem;
+    padding-bottom: 5px;
+    font-weight: 400;
+}
+
+.contents__description {
+    color: $font-color-light-grey;
+    line-height: 1.5rem;
+}

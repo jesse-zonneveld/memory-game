@@ -1,0 +1,13 @@
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    background-color: aqua;
+
+    .current-score-container {
+        margin-left: 20px;
+    }
+
+    .best-score-container {
+        margin-right: 20px;
+    }
+}

@@ -2,7 +2,7 @@
 
 html {
     min-height: 100vh;
-    background-color: $linen;
+    background-color: #eef4cd;
 }
 
 .l-container-1080 {
@@ -14,12 +14,12 @@ html {
     width: 100%;
 }
 
-.bg-green {
-    background-color: #bfd8c8;
-}
+// .bg-green {
+//     background-color: #bfd8c8;
+// }
 
 @media only screen and (max-width: 1200px) {
     .l-container-1080 {
-        width: 90%;
+        max-width: 90%;
     }
 }

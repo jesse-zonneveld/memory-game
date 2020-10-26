@@ -3,32 +3,110 @@
 .scoreboard {
     display: flex;
     justify-content: space-between;
-    margin: 0 auto;
-    margin-bottom: 20px;
+    align-items: center;
     font-size: 1.1rem;
-    max-width: 880px;
 
-    .current-score-container,
-    .best-score-container {
-        margin: 20px;
+    .current-score-title {
+        margin-left: 40px;
+        white-space: nowrap;
     }
-
-    .current-score-title,
     .best-score-title {
+        margin-right: 40px;
         white-space: nowrap;
     }
 }
 
-@media only screen and (max-width: 350px) {
-    .scoreboard {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
+.banner {
+    position: relative;
+    margin: 50px auto;
+    width: 90%;
+    height: 60px;
+    border: 1px solid #8a1;
+    text-align: center;
+    background: #9b2;
+    border-radius: 4px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15) inset,
+        0 6px 10px rgba(0, 0, 0, 0.15);
+}
 
-        .current-score-container,
-        .best-score-container {
-            margin: 10px;
+.banner::before,
+.banner::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: -70px;
+    top: 24px;
+    display: block;
+    width: 40px;
+    height: 0px;
+    border: 30px solid #9b2;
+    border-right: 20px solid #791;
+    border-bottom-color: #94b81e;
+    border-left-color: transparent;
+    transform: rotate(-5deg);
+}
+
+.banner::after {
+    left: auto;
+    right: -70px;
+    border-left: 20px solid #791;
+    border-right: 30px solid transparent;
+    transform: rotate(5deg);
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+        .banner {
+            width: 80%;
+        }
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    body {
+        .banner {
+            width: 70%;
+        }
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    body {
+        .banner {
+            position: relative;
+            margin: 50px auto;
+            width: 90%;
+            height: fit-content;
+            border: 1px solid #8a1;
+            text-align: center;
+            background: #9b2;
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.15) inset,
+                0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .banner::before,
+        .banner::after {
+            display: none;
+        }
+
+        .scoreboard {
+            flex-direction: column;
+            justify-content: center;
+
+            .current-score-title {
+                margin-top: 20px;
+                margin-right: 0;
+                margin-bottom: 20px;
+                margin-left: 0;
+            }
+
+            .best-score-title {
+                margin-top: 0;
+                margin-right: 0;
+                margin-bottom: 20px;
+                margin-left: 0;
+            }
         }
     }
 }

@@ -1,6 +1,12 @@
+.game {
+    position: relative;
+}
+
 .cards {
     display: flex;
     font-size: 5rem;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
 }

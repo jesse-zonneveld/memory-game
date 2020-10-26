@@ -1,0 +1,22 @@
+@import "../01-config/variables";
+
+.btn {
+    background-color: $green;
+    color: white;
+    white-space: nowrap;
+    width: fit-content;
+    padding: 15px 40px;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    border: none;
+    border-radius: $border;
+    box-shadow: $shadow;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 50px;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}

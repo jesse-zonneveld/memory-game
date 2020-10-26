@@ -6,14 +6,14 @@ class Scoreboard extends Component {
         return (
             <div className="scoreboard">
                 <div className="current-score-container">
-                    <h3 className="current-score-title">
+                    <div className="current-score-title">
                         Current Score: {this.props.currentScore}
-                    </h3>
+                    </div>
                 </div>
                 <div className="best-score-container">
-                    <h3 className="best-score-title">
-                        Best Scroe: {this.props.bestScore}
-                    </h3>
+                    <div className="best-score-title">
+                        Best Score: {this.props.bestScore}
+                    </div>
                 </div>
             </div>
         );

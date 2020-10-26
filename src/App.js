@@ -38,18 +38,30 @@ class App extends React.Component {
     render() {
         return (
             <div className="app l-container-full-screen">
-                <Header title={"Memory Game"} />
-                <Instructions />
+                <div className="l-container-1080">
+                    <Header title={"Memory Game"} />
+                    <Instructions />
+                </div>
                 <div className="game-container">
-                    <Scoreboard
-                        currentScore={this.state.currentScore}
-                        bestScore={this.state.bestScore}
-                    />
-                    <Game
-                        resetScore={this.resetScore.bind(this)}
-                        incrementScore={this.incrementScore.bind(this)}
-                        updateBestScore={this.updateBestScore.bind(this)}
-                    />
+                    <div className="l-container-full-screen bg-green">
+                        <div className="l-container-1080">
+                            <Scoreboard
+                                currentScore={this.state.currentScore}
+                                bestScore={this.state.bestScore}
+                            />
+                        </div>
+                    </div>
+                    <div className="l-container-full-screen">
+                        <div className="l-container-1080">
+                            <Game
+                                resetScore={this.resetScore.bind(this)}
+                                incrementScore={this.incrementScore.bind(this)}
+                                updateBestScore={this.updateBestScore.bind(
+                                    this
+                                )}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         );

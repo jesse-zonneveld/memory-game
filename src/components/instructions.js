@@ -4,7 +4,9 @@ import "../scss/03-components/_instructions.scss";
 const Instructions = () => {
     return (
         <div className="instructions-container">
-            <h2 className="instructions-title">Instructions:</h2>
+            <h4 className="instructions-title">
+                Try to press as many different symbols that you can.
+            </h4>
             <ol className="instructions-list">
                 <li className="instruction">
                     Press on any card to shuffle deck.

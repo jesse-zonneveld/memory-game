@@ -2,15 +2,17 @@ import React, { Component } from "react";
 import "../scss/03-components/_game.scss";
 import Card from "./card";
 import GameOver from "./gameOver";
+import Overlay from "./overlay";
 
 class Game extends Component {
     constructor(props) {
         super(props);
+        this.deck = [];
         this.state = {
-            deck: [],
             seenDeck: [],
             sampleDeck: [],
             gameOver: false,
+            overlay: false,
         };
         this.icons = [
             "far fa-address-card",
@@ -47,31 +49,50 @@ class Game extends Component {
             "fas fa-clock",
             "fas fa-child",
         ];
+        this.initializeDeck();
     }
 
     componentDidMount() {
-        console.log("mount");
-        const newDeck = [];
-        this.icons.forEach((icon, i) => {
-            newDeck.push([i, icon]);
-        });
+        this.shuffleDeck();
+    }
 
-        this.setState({
-            deck: newDeck,
-            sampleDeck: newDeck.slice(0, 12),
+    initializeDeck() {
+        this.icons.forEach((icon, i) => {
+            this.deck.push([i, icon]);
         });
     }
 
-    checkSelectedCard(cardIndex) {
+    checkSelectedCard(cardIndex, card) {
         if (this.state.seenDeck.includes(cardIndex)) {
-            this.gameOver();
+            setTimeout(() => {
+                this.gameOver();
+                card.classList.remove("red");
+                this.setState({
+                    overlay: false,
+                });
+            }, 2000);
+            this.setState({
+                overlay: true,
+            });
+            card.classList.add("red");
         } else {
-            this.addSeenCard(cardIndex);
+            setTimeout(() => {
+                this.addSeenCard(cardIndex);
+                card.classList.remove("green");
+                this.setState({
+                    overlay: false,
+                });
+            }, 2000);
+            this.setState({
+                overlay: true,
+            });
+            card.classList.add("green");
         }
     }
 
     gameOver() {
         this.setState({
+            seenDeck: [],
             gameOver: true,
         });
         this.props.updateBestScore();
@@ -80,10 +101,11 @@ class Game extends Component {
     resetGame() {
         this.props.resetScore();
         this.setState({
-            seenDeck: [],
-            sampleDeck: this.state.deck.slice(0, 12),
+            sampleDeck: [],
             gameOver: false,
         });
+        this.shuffleDeck();
+        console.log(this.state.seenDeck);
     }
 
     addSeenCard(cardIndex) {
@@ -95,14 +117,13 @@ class Game extends Component {
     }
 
     shuffleDeck() {
-        console.log("inside shuffle");
         let atLeastOneUnseenCard = false;
         let newSampleDeck = [];
         while (
             !atLeastOneUnseenCard &&
-            !(this.state.seenDeck.length >= this.state.deck.length)
+            !(this.state.seenDeck.length >= this.deck.length)
         ) {
-            newSampleDeck = [...this.state.deck]
+            newSampleDeck = [...this.deck]
                 .sort(() => Math.random() - 0.5)
                 .slice(0, 12);
             const test = newSampleDeck.find(
@@ -110,8 +131,6 @@ class Game extends Component {
             );
 
             atLeastOneUnseenCard = test === undefined ? false : true;
-            console.log(test);
-            console.log(atLeastOneUnseenCard);
         }
         this.setState({
             sampleDeck: newSampleDeck,
@@ -119,21 +138,16 @@ class Game extends Component {
     }
 
     render() {
-        console.log(this.state.deck);
-        console.log(this.state.sampleDeck);
-        console.log(this.state.seenDeck);
         return (
             <div className="game">
-                <button onClick={() => this.addSeenCard(this.counter)}>
-                    add
-                </button>
-                <button onClick={this.gameOver.bind(this)}>gameover</button>
+                <Overlay active={this.state.overlay} />
                 {this.state.gameOver ? (
                     <GameOver resetGame={this.resetGame.bind(this)} />
                 ) : (
                     <div className="cards">
-                        {this.state.sampleDeck.map((card) => (
+                        {this.state.sampleDeck.map((card, i) => (
                             <Card
+                                key={i}
                                 index={card[0]}
                                 icon={card[1]}
                                 checkSelectedCard={this.checkSelectedCard.bind(

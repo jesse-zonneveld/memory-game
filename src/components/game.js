@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../scss/03-components/_game.scss";
 import Card from "./card";
-import GameOver from "./gameOver";
+import GameEnd from "./gameEnd";
 import Overlay from "./overlay";
 
 class Game extends Component {
@@ -12,6 +12,7 @@ class Game extends Component {
             seenDeck: [],
             sampleDeck: [],
             gameOver: false,
+            win: false,
             overlay: false,
         };
         this.icons = [
@@ -98,22 +99,34 @@ class Game extends Component {
         this.props.updateBestScore();
     }
 
+    gameWin() {
+        this.setState({
+            seenDeck: [],
+            win: true,
+        });
+        this.props.updateBestScore();
+    }
+
     resetGame() {
         this.props.resetScore();
         this.setState({
             sampleDeck: [],
             gameOver: false,
+            win: false,
         });
         this.shuffleDeck();
-        console.log(this.state.seenDeck);
     }
 
     addSeenCard(cardIndex) {
         this.setState({
             seenDeck: this.state.seenDeck.concat(cardIndex),
         });
-        this.shuffleDeck();
         this.props.incrementScore();
+        if (this.state.seenDeck.length >= this.deck.length) {
+            this.gameWin();
+        } else {
+            this.shuffleDeck();
+        }
     }
 
     shuffleDeck() {
@@ -141,8 +154,18 @@ class Game extends Component {
         return (
             <div className="game">
                 <Overlay active={this.state.overlay} />
-                {this.state.gameOver ? (
-                    <GameOver resetGame={this.resetGame.bind(this)} />
+                {this.state.gameOver || this.state.win ? (
+                    this.state.gameOver ? (
+                        <GameEnd
+                            title="Game Over"
+                            resetGame={this.resetGame.bind(this)}
+                        />
+                    ) : (
+                        <GameEnd
+                            title="You Win!"
+                            resetGame={this.resetGame.bind(this)}
+                        />
+                    )
                 ) : (
                     <div className="cards">
                         {this.state.sampleDeck.map((card, i) => (
